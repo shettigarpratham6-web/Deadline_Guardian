@@ -1,0 +1,6 @@
+{
+  "name": "Deadline Guardian AI",
+  "description": "Sophisticated AI-powered deadline protector and task strategist designed to automatically prioritize workloads, generate actionable plans, and shield your focus.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
