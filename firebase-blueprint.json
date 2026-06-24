@@ -1,0 +1,80 @@
+{
+  "entities": {
+    "Task": {
+      "title": "Task",
+      "description": "User specific task with title, priority, deadline, status, and AI subtasks",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "deadline": { "type": "string" },
+        "priority": { "type": "string", "enum": ["low", "medium", "high"] },
+        "status": { "type": "string", "enum": ["pending", "active", "completed"] },
+        "subtasks": { "type": "array" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "title", "deadline", "priority", "status"]
+    },
+    "Planner": {
+      "title": "Planner",
+      "description": "AI generated daily strategy based on workload and deadlines",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "date": { "type": "string" },
+        "todayPath": { "type": "string" },
+        "recommendations": { "type": "array" },
+        "productivityScore": { "type": "integer" },
+        "workloadAssessment": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "date", "todayPath", "recommendations", "productivityScore", "workloadAssessment"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "Alert or system notification for upcoming deadlines or completed tasks",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "read": { "type": "boolean" }
+      },
+      "required": ["userId", "title", "message", "type", "createdAt", "read"]
+    },
+    "User": {
+      "title": "User",
+      "description": "Registered user profile with email and updatedAt timestamp",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["email"]
+    }
+  },
+  "firestore": {
+    "/tasks/{taskId}": {
+      "schema": { "$ref": "#/entities/Task" },
+      "description": "User specific task list"
+    },
+    "/planners/{plannerId}": {
+      "schema": { "$ref": "#/entities/Planner" },
+      "description": "Daily planner reports and workloads"
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/Notification" },
+      "description": "Notifications feed for user"
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User specific profile metadata"
+    }
+  }
+}
